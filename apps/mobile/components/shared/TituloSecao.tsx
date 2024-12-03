@@ -1,16 +1,14 @@
+import { fontBold, py4, selfStart, textXl, textZinc400 } from "@/style";
 import { Text } from "react-native";
-import { fontBold, py4, selfCenter, textXl, textZinc400 } from "@/style";
-
-
 
 export interface TituloSecaoProps {
-    texto: string;
+  texto: string;
 }
 
 export default function TituloSecao(props: TituloSecaoProps) {
-    return (
-        <Text style={[textXl, fontBold, py4, textZinc400, selfCenter]}>
-            {props.texto}
-        </Text>
-    );
+  return (
+    <Text style={[textXl, fontBold, py4, textZinc400, selfStart]}>
+      {props.texto}
+    </Text>
+  );
 }

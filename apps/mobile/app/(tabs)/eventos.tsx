@@ -1,16 +1,15 @@
-import EventoCard from "@/components/evento/eventoCard";
-import NovoEvento from "@/components/evento/NovoEvento";
-import SemEventos from "@/components/evento/SemEventos";
-import useEventos from "@/data/hooks/useEventos";
 import { alignCenter, bgBlack, flex1, gapY4, p4, py8 } from "@/style";
-import { useRouter } from "expo-router";
 import { Pressable, SafeAreaView, ScrollView } from "react-native";
-import 'react-native-get-random-values'; // Adiciona o suporte ao getRandomValues
-
+import { useRouter } from "expo-router";
+import EventoCard from "@/components/evento/EventoCard";
+import useEventos from "@/data/hooks/useEventos";
+import SemEventos from "@/components/evento/SemEventos";
+import NovoEvento from "@/components/evento/NovoEvento";
 
 export default function TelaEventos() {
   const { eventos } = useEventos();
   const router = useRouter();
+
   return (
     <SafeAreaView style={[flex1, bgBlack, p4]}>
       {eventos.length === 0 && <SemEventos />}

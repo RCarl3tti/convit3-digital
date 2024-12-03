@@ -1,8 +1,6 @@
 import { ProvedorEventos } from "@/data/contexts/ContextoEventos";
-import { colors } from "@/style";
+import { colors } from "@/style/colors";
 import { Stack } from "expo-router";
-import 'react-native-get-random-values'; // Adiciona o suporte ao getRandomValues
-
 
 export default function RootLayout() {
   return (
@@ -12,6 +10,18 @@ export default function RootLayout() {
           name="(tabs)"
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="(stack)/qrcode"
+          options={{
+            headerShown: true,
+            title: "Leitor de QR Code",
+            headerBackTitle: "Voltar",
+            headerTintColor: "white",
+            headerStyle: {
+              backgroundColor: colors.zinc[900],
+            },
           }}
         />
         <Stack.Screen
@@ -25,8 +35,7 @@ export default function RootLayout() {
             },
           }}
         />
-
-      </ Stack>
-      </ProvedorEventos>
+      </Stack>
+    </ProvedorEventos>
   );
 }

@@ -1,3 +1,2 @@
-export * from './utility';
-export * from './components';
-export * from './colors';
+export * from "./components";
+export * from "./utility";

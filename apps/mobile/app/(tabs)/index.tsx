@@ -1,21 +1,15 @@
-
-import Logo from "@/components/template/logo";
+import Logo from "@/components/template/Logo";
 import { bgBlack, centerGrow } from "@/style";
 import { ImageBackground } from "react-native";
-import 'react-native-get-random-values'; // Adiciona o suporte ao getRandomValues
-
 
 export default function TelaInicio() {
   return (
-    <ImageBackground 
+    <ImageBackground
       source={require("@/assets/images/background.png")}
       resizeMode="cover"
-      style={[centerGrow ,bgBlack]}
+      style={[centerGrow, bgBlack]}
     >
-
       <Logo />
-
     </ImageBackground>
-    
   );
 }
