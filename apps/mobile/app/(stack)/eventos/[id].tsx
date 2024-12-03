@@ -1,18 +1,22 @@
 import EventoNaoEncontrado from "@/components/evento/EventoNaoEncontrado";
 import InformacoesEvento from "@/components/evento/informacoesEvento";
+import ListaConvidados from "@/components/evento/ListaConvidados";
 import Estatistica from "@/components/shared/Estatistica";
+import TituloSecao from "@/components/shared/TituloSecao";
 import useEventos from "@/data/hooks/useEventos";
-import { bgBlack, flex1, flexRow, gapX2, gapY4, p4, py4, roundedLg, wFull } from "@/style";
+import { bgBlack, bgRed500, button, flex1, flexRow, fontBold, gapX2, gapY4, p4, py4, roundedLg, selfCenter, textWhite, w4_5, wFull } from "@/style";
+import { AntDesign } from "@expo/vector-icons";
 import { Convidado } from "core";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
-import { Image, SafeAreaView, ScrollView, View } from "react-native";
+import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import 'react-native-get-random-values'; // Adiciona o suporte ao getRandomValues
 
 
 export default function TelaDetalheEvento() {
     const params = useLocalSearchParams();
-    const { evento, selecionarEvento } = useEventos();
+    const { evento, selecionarEvento, excluirEvento } = useEventos();
+    const router = useRouter();
 
     useEffect(() => {
         selecionarEvento(params.id as string) ;
@@ -36,6 +40,22 @@ export default function TelaDetalheEvento() {
                     <Estatistica texto="Confirmações" valor={presentes.length} imagem={require("@/assets/images/confirmados.png")} />
                     <Estatistica texto="Total" valor={totalConvidados} imagem={require("@/assets/images/acompanhantes.png")} />               
                 </View>
+                    <TituloSecao texto="Presenças Confirmadas" />
+                    <ListaConvidados convidados={presentes} />
+                    
+                    <TituloSecao texto="Ausências Confirmadas" />
+                    <ListaConvidados convidados={ausentes} />
+
+                    <Pressable style={[button, bgRed500, w4_5, selfCenter]}
+                        onPress={() => {
+                            excluirEvento(evento.id);
+                            router.back();
+                        }}
+                    >
+                        <AntDesign name="delete" size={20} color="white" />
+                        <Text style={[fontBold, textWhite]}>Excluir Evento</Text>
+                    </Pressable>
+                    
             </ScrollView>
         </SafeAreaView>
     ) : (
