@@ -1,7 +1,8 @@
 import EventoCard from "@/components/evento/eventoCard";
+import NovoEvento from "@/components/evento/NovoEvento";
 import SemEventos from "@/components/evento/SemEventos";
 import useEventos from "@/data/hooks/useEventos";
-import { bgBlack, flex1, gapY4, p4, py8 } from "@/style";
+import { alignCenter, bgBlack, flex1, gapY4, p4, py8 } from "@/style";
 import { useRouter } from "expo-router";
 import { Pressable, SafeAreaView, ScrollView } from "react-native";
 import 'react-native-get-random-values'; // Adiciona o suporte ao getRandomValues
@@ -13,7 +14,7 @@ export default function TelaEventos() {
   return (
     <SafeAreaView style={[flex1, bgBlack, p4]}>
       {eventos.length === 0 && <SemEventos />}
-      <ScrollView contentContainerStyle={[gapY4, py8]}>
+      <ScrollView contentContainerStyle={[gapY4, py8, alignCenter]}>
         {eventos.map((evento) => (
           <Pressable
             key={evento.id}
@@ -22,6 +23,7 @@ export default function TelaEventos() {
             <EventoCard evento={evento} />
           </Pressable>
         ))}
+        <NovoEvento />
       </ScrollView>
     </SafeAreaView>
   );
