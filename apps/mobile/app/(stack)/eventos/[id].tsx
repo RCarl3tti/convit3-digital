@@ -43,10 +43,8 @@ export default function TelaDetalheEvento() {
     selecionarEvento(params.id as string);
   }, [params.id]);
 
-  const presentes =
-    evento?.convidados?.filter((c: Convidado) => c.confirmado) ?? [];
-  const ausentes =
-    evento?.convidados?.filter((c: Convidado) => !c.confirmado) ?? [];
+  const presentes = evento?.convidados?.filter((c: Convidado) => c.confirmado) ?? [];
+  const ausentes = evento?.convidados?.filter((c: Convidado) => !c.confirmado) ?? [];
 
   const totalConvidados = presentes.reduce((total, convidado) => {
     return total + convidado.qtdeAcompanhantes + 1;
