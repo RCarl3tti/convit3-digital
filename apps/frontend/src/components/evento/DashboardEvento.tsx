@@ -1,7 +1,7 @@
 import { Convidado, Evento } from "core"
 import InformacoesEvento from "./InformacoesEvento"
 import AcessarViaQRCode from "./AcessarViaQRCode"
-import Estatistica from "../share/Estatistica"
+import Estatistica from "../shared/Estatistica"
 import ListaConvidados from "./ListaConvidados";
 
 export interface DashboardEventoProps {

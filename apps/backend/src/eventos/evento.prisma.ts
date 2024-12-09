@@ -1,5 +1,5 @@
-import { Convidado, Evento } from 'core';
 import { Injectable } from '@nestjs/common';
+import { Convidado, Evento } from 'core';
 import { PrismaProvider } from 'src/db/prisma.provider';
 
 @Injectable()
@@ -8,7 +8,10 @@ export class EventoPrisma {
 
   salvar(evento: Evento) {
     return this.prisma.evento.create({
-      data: {...evento as any, convidados: { create: evento.convidados }},
+      data: {
+        ...(evento as any),
+        convidados: { create: evento.convidados },
+      },
     });
   }
 
@@ -17,11 +20,7 @@ export class EventoPrisma {
       data: {
         ...convidado,
         qtdeAcompanhantes: +(convidado.qtdeAcompanhantes ?? 0),
-        evento: {
-          connect: {
-            id: evento.id,
-          },
-        },
+        evento: { connect: { id: evento.id } },
       },
     });
   }
@@ -30,31 +29,35 @@ export class EventoPrisma {
     return this.prisma.evento.findMany() as any;
   }
 
-  async buscarPorId(id: string, completo: boolean = false): Promise<Evento | null> {
+  async buscarPorId(
+    id: string,
+    completo: boolean = false,
+  ): Promise<Evento | null> {
     return this.prisma.evento.findUnique({
       where: { id },
       include: { convidados: completo },
     }) as any;
   }
 
-  async buscarPorAlias(alias: string, completo: boolean = false): Promise<Evento | null> {
+  async buscarPorAlias(
+    alias: string,
+    completo: boolean = false,
+  ): Promise<Evento | null> {
     return this.prisma.evento.findUnique({
       select: {
         id: true,
         nome: true,
-        alias: true,
         descricao: true,
         data: true,
         local: true,
         imagem: true,
         imagemBackground: true,
+        alias: true,
+        senha: completo,
         publicoEsperado: completo,
         convidados: completo,
-        senha: completo,},
+      },
       where: { alias },
     }) as any;
   }
-
-
-
 }

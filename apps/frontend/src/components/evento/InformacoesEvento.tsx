@@ -1,5 +1,5 @@
 import { Evento } from "core"
-import Informacao from "../share/Informacao"
+import Informacao from "../shared/Informacao"
 
 export interface InformacoesEventoProps {
     evento: Evento
