@@ -1,17 +1,18 @@
 import React from "react";
 
 export interface CampoEntradaProps extends React.HTMLProps<HTMLInputElement> {
-  label: string;
+  label?: string;
   value: string | number;
   onChange: (event: any) => void;
   descricao?: string;
   observacao?: string;
   erro?: string;
+  outterClassName?: string;
 }
 
 export default function CampoEntrada(props: CampoEntradaProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-2 ${props.outterClassName ?? ""}`}>
       <div className="flex flex-col">
         {props.label && <label className="text-lg font-black text-white">{props.label}</label>}
         {props.descricao && <p className="text-sm font-light text-zinc-400 -mt-1">{props.descricao}</p>}

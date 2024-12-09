@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.24.0",
     "autoprefixer": "^10.4.20",
+    "core": "*",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-qr-code": "^2.0.15",
-    "tailwind": "^4.0.0",
-    "core": "*"
+    "tailwind": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
