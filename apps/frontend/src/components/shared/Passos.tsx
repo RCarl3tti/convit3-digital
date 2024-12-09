@@ -6,6 +6,7 @@ export interface PassosProps {
   labels: string[];
   children: any;
   labelAcao: string;
+  permiteProximoPasso?: boolean[];
   acao: () => void;
 }
 
@@ -43,14 +44,20 @@ export default function Passos(props: PassosProps) {
                     w-9 h-9 rounded-full
                     ${selecionado ? "bg-white text-black" : "bg-zinc-700 text-zinc-400"}     
                 `}
-              >{i + 1}</span>
-              <span className={selecionado ? "text-white" : "text-zinc-600"}>{label}</span>
+              >
+                {i + 1}
+              </span>
+              <span className={selecionado ? "text-white" : "text-zinc-600"}>
+                {label}
+              </span>
             </div>
           );
         })}
       </div>
     );
   }
+
+  const permiteProximoPasso = props.permiteProximoPasso?.[passoAtual] ?? true;
 
   return (
     <div className="flex-1 flex flex-col gap-10 w-full">
@@ -75,10 +82,10 @@ export default function Passos(props: PassosProps) {
         {semProximoPasso() ? (
           <button
             onClick={props.acao}
+            disabled={!permiteProximoPasso}
             className={`
                 botao
-                bg-green-700 hover:bg-green-600 text-white
-                
+            ${!permiteProximoPasso ? "bg-zinc-400 cursor-not-allowed opacity-50" : "bg-green-600 text-white"}
                 `}
           >
             <span>{props.labelAcao}</span>
@@ -86,13 +93,13 @@ export default function Passos(props: PassosProps) {
         ) : (
           <button
             onClick={proximoPasso}
-            disabled={semProximoPasso()}
+            disabled={!permiteProximoPasso || semProximoPasso()}
             className={`
                 botao
                 ${
-                  semProximoPasso()
+                  !permiteProximoPasso || semProximoPasso()
                     ? "bg-zinc-400 cursor-not-allowed opacity-50"
-                    : "bg-green-700 hover:bg-green-600 text-white"
+                    : "bg-green-600 text-white"
                 }
                 `}
           >
